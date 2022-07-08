@@ -11,7 +11,6 @@ class Product extends Model {}
 Product.init(
   {
     // TABLE COLUMN DEFINITIONS
-    // id: INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
