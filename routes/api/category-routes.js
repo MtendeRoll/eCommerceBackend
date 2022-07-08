@@ -6,19 +6,11 @@ const { Category, Product } = require("../../models");
 router.get("/", (req, res) => {
   // find all categories
   Category.findAll({
-    attributes: [
-      "id",
-      "category_name",
-      // [sequelize.literal(""), ""]
-    ],
-    // order: [["", ""]],
     include: [
       {
         model: Product,
         attributes: ["id", "product_name", "price", "stock", "category_id"],
-        // include: { model: , attributes: [""]}
       },
-      // {model: , attributes: [""]}
     ],
   })
     .then((dbCategoryData) => res.json(dbCategoryData))
@@ -35,11 +27,6 @@ router.get("/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
-    attributes: [
-      "id",
-      "category_name",
-      // [sequelize.literal(""), ""]
-    ],
     include: [
       {
         model: Product,
@@ -75,16 +62,11 @@ router.post("/", (req, res) => {
 
 router.put("/:id", (req, res) => {
   // update a category by its `id` value
-  Category.update(
-    {
-      category_name: req.body.category_name,
+  Category.update(req.body, {
+    where: {
+      id: req.params.id,
     },
-    {
-      where: {
-        id: req.params.id,
-      },
-    }
-  )
+  })
     .then((dbCategoryData) => {
       if (!dbCategoryData) {
         res.status(404).json({ message: "No post found with this id" });

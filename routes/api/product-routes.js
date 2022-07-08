@@ -7,28 +7,16 @@ const { Product, Category, Tag, ProductTag } = require("../../models");
 router.get("/", (req, res) => {
   // find all products
   Product.findAll({
-    attributes: [
-      "id",
-      "Product_name",
-      "price",
-      "stock",
-      "category_id",
-      // [sequelize.literal(""), ""]
-    ],
-    // order: [["", ""]],
     include: [
       {
-        model: ProductTag,
-        attributes: ["id", "product_id", "tag_id"],
-        include: {
-          model: Tag,
-          attributes: ["id"],
-        },
+        model: Category,
+        attributes: ["id", "category_name"],
       },
-      // {
-      //   model: Tag,
-      //   attributes: ["id"],
-      // },
+      {
+        model: Tag,
+        attributes: ["tag_name"],
+        through: ProductTag,
+      },
     ],
   })
     .then((dbProductData) => res.json(dbProductData))
@@ -46,14 +34,6 @@ router.get("/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
-    attributes: [
-      "id",
-      "product_name",
-      "price",
-      "stock",
-      "category_id",
-      // [sequelize.literal(""), ""]
-    ],
     include: [
       {
         model: Category,
@@ -61,7 +41,7 @@ router.get("/:id", (req, res) => {
       },
       {
         model: Tag,
-        attributes: ["tag_name"],
+        attributes: ["id", "tag_name"],
       },
     ],
   })
