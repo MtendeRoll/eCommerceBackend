@@ -10,7 +10,10 @@ router.get("/", (req, res) => {
       {
         model: Product,
         attributes: ["id", "product_name", "price", "stock", "category_id"],
-        // through: ProductTag,
+        include: {
+          model: ProductTag,
+          attributes: ["id", "product_id", "tag_id"],
+        },
       },
     ],
   })
@@ -32,11 +35,20 @@ router.get("/:id", (req, res) => {
       {
         model: Product,
         attributes: ["id", "product_name", "price", "stock", "category_id"],
-        //through: ProductTag,
+        include: {
+          model: ProductTag,
+          attributes: ["id", "product_id", "tag_id"],
+        },
       },
     ],
   })
-    .then((dbTagData) => res.json(dbTagData))
+    .then((dbTagData) => {
+      if (!dbTagData) {
+        res.status(404).json({ message: "No tag found with this id" });
+        return;
+      }
+      res.json(dbTagData);
+    })
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
@@ -49,20 +61,6 @@ router.post("/", (req, res) => {
   Tag.create({
     tag_name: req.body.tag_name,
   })
-    // .then((tag) => {
-    //   // if there's product tags, we need to create pairings to bulk create in the ProductTag model
-    //   if (req.body.productIds.length) {
-    //     const productTagIdArr = req.body.productIds.map((product_id) => {
-    //       return {
-    //         tag_id: tag.id,
-    //         product_id,
-    //       };
-    //     });
-    //     return ProductTag.bulkCreate(productTagIdArr);
-    //   }
-    //   // if no product tags, just respond
-    //   res.status(200).json(tag);
-    // })
     .then((dbTagData) => res.json(dbTagData))
     .catch((err) => {
       console.log(err);
@@ -77,10 +75,6 @@ router.put("/:id", (req, res) => {
       id: req.params.id,
     },
   })
-    .then((tag) => {
-      // find all associated products from ProductTag
-      return ProductTag.findAll({ where: { tag_id: req.params.id } });
-    })
     .then((dbTagData) => {
       if (!dbTagData[0]) {
         res.status(404).json({ message: "No tag found with this id" });
@@ -89,7 +83,7 @@ router.put("/:id", (req, res) => {
       res.json(dbTagData);
     })
     .catch((err) => {
-      // console.log(err);
+      console.log(err);
       res.status(400).json(err);
     });
 });
@@ -103,7 +97,7 @@ router.delete("/:id", (req, res) => {
   })
     .then((dbTagData) => {
       if (!dbTagData) {
-        res.status(404).json({ message: "No post found with this id" });
+        res.status(404).json({ message: "No tag found with this id" });
         return;
       }
       res.json(dbTagData);
