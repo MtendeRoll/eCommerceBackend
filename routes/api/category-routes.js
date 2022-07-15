@@ -18,7 +18,6 @@ router.get("/", (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
-  // be sure to include its associated Products
 });
 
 router.get("/:id", (req, res) => {
@@ -45,7 +44,6 @@ router.get("/:id", (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
-  // be sure to include its associated Products
 });
 
 router.post("/", (req, res) => {
