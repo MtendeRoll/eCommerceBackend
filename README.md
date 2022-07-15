@@ -7,6 +7,7 @@ This is a backend application that uses a working Express.js API and is configur
 - [Installation](#installation)
 - [Application Criteria](#application-criteria)
 - [Links](#links)
+- [Mock-up]()
 - [Video](#walkthrough-video)
 - [License](#license)
 
@@ -15,8 +16,14 @@ This is a backend application that uses a working Express.js API and is configur
 The JSON file will have the necessary dependencies. type this in your command line:
 
 ```
-npm i
+node server.js
 ```
+
+```
+node seeds/seed.js
+```
+
+Then open insomnia to do the GET, POST, PUT and DELETE requests to test out the application.
 
 ## Application Criteria
 
@@ -39,23 +46,14 @@ GIVEN a functional Express.js API:
 
 ## Walkthrough Video
 
-- A walkthrough video that demonstrates the functionality of the e-commerce back end must be submitted, and a link to the video should be included in your README file.
+- A walkthrough video that demonstrates the functionality of the e-commerce back end.
 
-- The walkthrough video must show all of the technical acceptance criteria being met.
+[Video]()
 
-- The walkthrough video must demonstrate how to create the schema from the MySQL shell.
+## Mock-up
 
-- The walkthrough video must demonstrate how to seed the database from the command line.
-
-- The walkthrough video must demonstrate how to start the application’s server.
-
-- The walkthrough video must demonstrate GET routes for all categories, all products, and all tags being tested in Insomnia.
-
-- The walkthrough video must demonstrate GET routes for a single category, a single product, and a single tag being tested in Insomnia.
-
-- The walkthrough video must demonstrate POST, PUT, and DELETE routes for categories, products, and tags being tested in Insomnia
-
-[Video](./assets/video/)
+- Gif showing the mock-up of the finished application
+  ![mock-up](./assets/gif/)
 
 ## License
 
