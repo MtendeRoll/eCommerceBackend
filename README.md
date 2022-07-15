@@ -48,12 +48,12 @@ GIVEN a functional Express.js API:
 
 - A walkthrough video that demonstrates the functionality of the e-commerce back end.
 
-[Video]()
+[Video](https://drive.google.com/file/d/1wdprUISWkDCRD_vEG2qmjm-S_ZzzyLnk/view)
 
 ## Mock-up
 
 - Gif showing the mock-up of the finished application
-  ![mock-up](./assets/gif/)
+  ![mock-up](./assets/gif/ecommerce-mockup.gif)
 
 ## License
 
